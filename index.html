@@ -30,40 +30,42 @@
       max-width: 1000px;
       margin: 40px auto;
       border-radius: 16px;
-      overflow: hidden;
+      overflow: visible;
       z-index: 0;
     }
 
-    .video-container::before {
-      content: '';
+    .video-border {
       position: absolute;
-      top: -8px;
-      left: -8px;
-      right: -8px;
-      bottom: -8px;
-      border-radius: 20px;
-      background: conic-gradient(from 0deg, #00f0ff, #0077ff, #00f0ff);
-      animation: sweepLight 6s linear infinite;
-      z-index: -1;
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
+      border-radius: 24px;
+      background: linear-gradient(270deg, #00f0ff, #0077ff, #00f0ff);
+      background-size: 600% 600%;
+      animation: neonSweep 12s ease infinite;
+      z-index: 1;
       filter: blur(12px);
+      pointer-events: none;
     }
 
-    @keyframes sweepLight {
+    .video-frame {
+      position: relative;
+      z-index: 2;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    @keyframes neonSweep {
       0% {
-        transform: rotate(0deg);
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
       }
       100% {
-        transform: rotate(360deg);
+        background-position: 0% 50%;
       }
-    }
-
-    video {
-      width: 100%;
-      height: auto;
-      display: block;
-      position: relative;
-      z-index: 1;
-      border-radius: 16px;
     }
 
     .footer {
@@ -74,18 +76,47 @@
       padding: 15px 0;
       background: rgba(0, 0, 0, 0.7);
       font-size: 1em;
-      animation: slideUp 1.5s ease-out;
+      animation: fadeIn 2s ease-out;
     }
 
-    @keyframes slideUp {
+    @keyframes fadeIn {
       from {
-        transform: translateY(100%);
         opacity: 0;
+        transform: translateY(20px);
       }
       to {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
       }
+    }
+
+    .ca-text {
+      display: inline;
+    }
+
+    .pump-highlight {
+      color: #00ff75;
+      font-weight: bold;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        text-shadow: 0 0 6px #00ff75;
+        transform: scale(1);
+      }
+      50% {
+        text-shadow: 0 0 12px #00ff75;
+        transform: scale(1.05);
+      }
+    }
+
+    .x-logo {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      vertical-align: middle;
+      filter: brightness(1.5);
     }
   </style>
 </head>
@@ -93,15 +124,19 @@
   <h1>Titanic (1997)</h1>
 
   <div class="video-container">
-    <video controls>
-      <source src="https://store3.gofile.io/download/web/4b461cdf-36af-4a6f-926a-887333d96128/Titanic.mp4" type="video/mp4">
-
-      Your browser does not support the video tag.
-    </video>
+    <div class="video-border"></div>
+    <div class="video-frame">
+      <div style="position:relative; width:100%; height:0px; padding-bottom:42.723%">
+        <iframe allow="fullscreen" allowfullscreen height="100%" src="https://streamable.com/e/zlqpx3?" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"></iframe>
+      </div>
+    </div>
   </div>
 
   <div class="footer">
-    Titanic (1997) | ca: 4mDUwHiR1EQHcuUcDHipeYa7Qep1JCJEKuuHQQFnpump
+    <span class="ca-text">Titanic (1997) | ca: 4mDUwHiR1EQHcuUcDHipeYa7Qep1JCJEKuuHQQFn</span><span class="pump-highlight">pump</span>
+    <a href="https://x.com/i/communities/1932994951148617929" target="_blank">
+      <img class="x-logo" src="https://abs.twimg.com/favicons/twitter.3.ico" alt="X logo">
+    </a>
   </div>
 </body>
 </html>
